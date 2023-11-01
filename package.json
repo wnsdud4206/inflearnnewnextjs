@@ -9,8 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.1"
+    "@apollo/client": "^3.8.6",
+    "@emotion/css": "^11.11.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@next/font": "^14.0.1",
+    "antd": "^5.10.3",
+    "axois": "^0.0.1-security",
+    "graphql": "^16.8.1",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
