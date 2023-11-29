@@ -32,6 +32,18 @@ export default function StaticRoutingBoardMovedPage() {
       // mutation도 다시 받아올 수 있나?
       refetchQueries: [{ query: FETCH_BOARDS }],
     });
+    /* ex) https://guuumi.tistory.com/67?category=1031842
+      refetchQueries: [
+        {
+          query: FETCH_BOARD_COMMENTS,
+          variables: {boardId: String(router.query.new)}
+        },
+        {
+          query: FETCH_BOARD_COMMENTS2,
+          variables: {boardId: String(router.query.new)}
+        }
+      ]
+    */
   };
 
   return (
