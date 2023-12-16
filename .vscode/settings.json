@@ -1,0 +1,4 @@
+{
+  "editor.formatOnSave": false,  // 저장할 때 마다 포메터적용
+  "editor.defaultFormatter": "esbenp.prettier-vscode"  // 어떤 포메터를 사용할 것인지
+}
