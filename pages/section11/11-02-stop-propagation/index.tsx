@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { IQuery } from "../../../src/commons/types/generated/types";
+import type { IQuery } from "../../../src/commons/types/generated/types";
 import Checkbox from "./checkbox";
 
 const FETCH_BOARDS = gql`
@@ -13,19 +13,19 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-export default function StaticRoutingBoardMovedPage() {
+export default function StaticRoutingBoardMovedPage(): JSX.Element {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARDS);
 
-  const qqq1 = () => {
+  const qqq1 = (): void => {
     alert("1번");
   };
-  const qqq4 = () => {
+  const qqq4 = (): void => {
     alert("4번");
   };
 
   return (
     <div>
-      {data ? (
+      {((data !== null) && (data !== undefined)) ? (
         <>
           {data.fetchBoards?.map((el: any) => (
             <div key={el.number} id={el.writer} onClick={qqq1}>

@@ -14,7 +14,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function GraphqlMutationPage() {
+export default function GraphqlMutationPage(): JSX.Element {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {

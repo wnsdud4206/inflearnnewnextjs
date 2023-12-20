@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent } from "react"
+import type { ChangeEvent, MouseEvent } from "react"
 
 export interface IBoardWriteProps {
   isEdit: boolean
@@ -14,9 +14,9 @@ export interface IMyVariables {
 }
 
 export interface IBoardWriteUIProps {
-  onChangeInp: (event: ChangeEvent<HTMLInputElement>) => void;
-  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
-  isEdit: any;
-  data?: any;
+  onChangeInp: (event: ChangeEvent<HTMLInputElement>) => void
+  onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void
+  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => void
+  isEdit: boolean
+  data?: any
 }

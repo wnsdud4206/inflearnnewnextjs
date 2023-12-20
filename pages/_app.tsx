@@ -1,5 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import type { AppProps } from 'next/dist/shared/lib/router/router'
+import type { AppProps } from 'next/app'
+// import type { AppProps } from 'next/dist/shared/lib/router/router'
 
 export default function App ({ Component, pageProps }: AppProps): JSX.Element {
   // graphql 세팅

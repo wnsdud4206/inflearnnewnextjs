@@ -1,5 +1,5 @@
 import { RedInput, BlueButton } from "./BoardWrite.styles";
-import { IBoardWriteUIProps } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
 
 export default function BoardWriteUI({
   onChangeInp,
@@ -7,7 +7,7 @@ export default function BoardWriteUI({
   onClickSubmit,
   isEdit,
   data,
-}: IBoardWriteUIProps) {
+}: IBoardWriteUIProps): JSX.Element {
   return (
     <div>
       작성자:{" "}

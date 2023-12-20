@@ -12,7 +12,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function StaticRoutingBoardMovedPage() {
+export default function StaticRoutingBoardMovedPage(): JSX.Element {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -20,14 +20,14 @@ export default function StaticRoutingBoardMovedPage() {
     },
   });
 
-  const onClickMove = () => {
-    router.push(`/section10/10-02-typescript-boards/${router.query.number}/edit`);
+  const onClickMove = (): void => {
+    void router.push(`/section10/10-02-typescript-boards/${String(router.query.number)}/edit`);
   }
 
   return (
     <div>
       <h3>{router.query.number}번 게시글</h3>
-      {data ? (
+      {((data !== null) && (data !== undefined)) ? (
         <>
           {/* <h3>{data.fetchBoard.number}번 게시글</h3> */}
           <h2>제목: {data.fetchBoard?.title}</h2>

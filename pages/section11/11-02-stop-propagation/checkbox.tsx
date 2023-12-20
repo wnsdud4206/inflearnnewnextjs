@@ -1,10 +1,10 @@
-import { MouseEvent } from "react";
+import type { MouseEvent } from "react";
 
-export default function Checkbox() {
-  const qqq2 = () => {
+export default function Checkbox(): JSX.Element {
+  const qqq2 = (): void => {
     alert("2번");
   };
-  const qqq3 = (event: MouseEvent<HTMLInputElement>) => {
+  const qqq3 = (event: MouseEvent<HTMLInputElement>): void => {
     event.stopPropagation();
     alert("3번");
   };

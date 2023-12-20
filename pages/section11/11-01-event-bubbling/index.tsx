@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
-import { MouseEvent } from "react";
-import { IQuery } from "../../../src/commons/types/generated/types";
+import type { MouseEvent } from "react";
+import type { IQuery } from "../../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
   query {
@@ -13,7 +13,7 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-export default function StaticRoutingBoardMovedPage() {
+export default function StaticRoutingBoardMovedPage(): JSX.Element {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">>(FETCH_BOARDS);
 
   const onClickAlert = (event: MouseEvent<HTMLDivElement>): void => {
@@ -22,7 +22,7 @@ export default function StaticRoutingBoardMovedPage() {
 
   return (
     <div>
-      {data ? (
+      {((data !== null) && (data !== undefined)) ? (
         <>
           {data.fetchBoards?.map((el: any) => (
             <div key={el.number} id={el.writer} onClick={onClickAlert}>

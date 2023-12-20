@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { type ChangeEvent, useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps, IMyVariables } from "./BoardWrite.types";
+import type { IBoardWriteProps, IMyVariables } from "./BoardWrite.types";
 
 export default function BoardWrite({
   isEdit,
@@ -14,9 +14,9 @@ export default function BoardWrite({
   const [updateBoard] = useMutation(UPDATE_BOARD);
   const router = useRouter();
 
-  const onClickSubmit = async () => {
+  const onClickSubmit = async (): Promise<void> => {
     const { writer, title, contents } = inp;
-    if (!writer || !title || !contents) {
+    if ((writer === "") || (title === "") || (contents === "")) {
       alert("빈칸이 없도록 입력해주세요!");
       return;
     }
@@ -28,12 +28,12 @@ export default function BoardWrite({
       },
     });
     console.log(result);
-    router.push(
+    void router.push(
       `/section10/10-02-typescript-boards/${result.data.createBoard.number}`,
     );
   };
 
-  const onClickUpdate = async () => {
+  const onClickUpdate = async (): Promise<void> => {
     try {
       const { writer, title, contents } = inp;
 
@@ -56,7 +56,7 @@ export default function BoardWrite({
         variables: myVariables,
       });
       console.log(result);
-      router.push(
+      void router.push(
         `/section10/10-02-typescript-boards/${result.data.updateBoard.number}`,
       );
     } catch (error) {
@@ -66,7 +66,7 @@ export default function BoardWrite({
   };
 
   // ChangeEvent<HTMLInputElement>, 이 타입이 제일 어려움... 더 공부해야할듯, onClick 이벤트 타입은 mouseEvent를 import 해야 됐였던 걸로 기억
-  const onChangeInp = ({ target: { id, value } }: ChangeEvent<HTMLInputElement>) => {
+  const onChangeInp = ({ target: { id, value } }: ChangeEvent<HTMLInputElement>): void => {
     const newInp = { ...inp, [id]: value };
     setInp(newInp);
   };
