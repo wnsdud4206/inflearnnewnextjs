@@ -2,7 +2,7 @@ import { BulbOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import type { MouseEvent } from "react";
 
-// icon을 글자로 취급되기 때문에 font-size로 크기조절
+// icon을 글자로 취급되기 때문에 font-size로 크기조절, BulbOutlined는 component
 const MyIcon = styled(BulbOutlined)`
   color: red;
   font-size: 50px;
