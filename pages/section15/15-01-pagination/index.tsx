@@ -1,12 +1,14 @@
 import { gql, useQuery } from "@apollo/client";
+import { MouseEvent, useState } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
-  query {
-    fetchBoards {
+  query fetchBoards($page: Int) {
+    fetchBoards(page: $page) {
       _id
       writer
       title
@@ -14,6 +16,12 @@ const FETCH_BOARDS = gql`
     }
   }
 `;
+
+// const FETCH_BOARDS_COUNT = gql`
+//   query {
+//     fetchBoardsCount
+//   }
+// `;
 
 export default function StaticRoutingBoardMovedPage(): JSX.Element {
   const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
