@@ -1,9 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import { type MouseEvent, useState } from "react";
+import { useState } from "react";
+import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
-  // IQueryFetchBoardsCountArgs,
+  IQueryFetchBoardsCountArgs,
 } from "../../../src/commons/types/generated/types";
 
 const FETCH_BOARDS = gql`
@@ -17,24 +18,27 @@ const FETCH_BOARDS = gql`
   }
 `;
 
-// const FETCH_BOARDS_COUNT = gql`
-//   query {
-//     fetchBoardsCount
-//   }
-// `;
+const FETCH_BOARDS_COUNT = gql`
+  query {
+    fetchBoardsCount
+  }
+`;
 
 export default function StaticRoutingBoardMovedPage(): JSX.Element {
   // const [page, setPage] = useState<number>(1);
-  const [pagination, setPagination] = useState<number>(1);
+  const [pagination, setPagination] = useState<number>(12850);
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS);
-  // const { data: countData } = useQuery<
-  //   Pick<IQuery, "fetchBoardsCount">,
-  //   IQueryFetchBoardsCountArgs
-  // >(FETCH_BOARDS_COUNT);
-  // // ex) 12848 = 1285 page
+  const { data: countData } = useQuery<
+    Pick<IQuery, "fetchBoardsCount">,
+    IQueryFetchBoardsCountArgs
+  >(FETCH_BOARDS_COUNT);
+  // // ex) 12851 = 1286 page
+  console.log(countData);
+  console.log(countData?.fetchBoardsCount);
+  console.log(typeof countData?.fetchBoardsCount);
 
   const onClickPage = (event: MouseEvent<HTMLButtonElement>): void => {
     console.log()
@@ -53,6 +57,8 @@ export default function StaticRoutingBoardMovedPage(): JSX.Element {
     setPagination((prev) => prev - 10);
   };
   const onClickPageNext = (): void => {
+    // const count = countData?.fetchBoardsCount < pagination + 10 ? countData?.fetchBoardsCount - pagination : pagination + 10;
+    // console.log(count);
     setPagination((prev) => prev + 10);
   };
 
