@@ -37,9 +37,12 @@ export default function StaticRoutingBoardMovedPage(): JSX.Element {
     Pick<IQuery, "fetchBoardsCount">,
     IQueryFetchBoardsCountArgs
   >(FETCH_BOARDS_COUNT);
-  // 주의할 점이 여기서 나오는 12851라는 숫자는 page가 아니라 게시글의 갯수이다. 그래서 나누기 10(한 번에 보여주는 boards 갯수)에 올림을 해주면 페이지의 갯수가 된다.
+  // 주의할 점이 여기서 나오는 12851라는 숫자(양에다라 바뀜)는 page가 아니라 게시글의 갯수이다. 그래서 나누기 10(한 번에 보여주는 boards 갯수)에 올림을 해주면 페이지의 갯수가 된다.
 
-  const lastPage = Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10);
+  const lastPage =
+    dataBoardsCount != null
+      ? Math.ceil((dataBoardsCount?.fetchBoardsCount ?? 10) / 10)
+      : 1;
   console.log(`dataBoardsCount: ${dataBoardsCount?.fetchBoardsCount}`);
   console.log(`lastPage: ${lastPage}`);
 
