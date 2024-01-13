@@ -18,21 +18,33 @@ const FETCH_BOARDS = gql`
 `;
 
 export default function StaticRoutingBoardMovedPage(): JSX.Element {
-  // 아무것도 수정하고 있지 않을 때 나는 null로 해서 type도 <null | number>로 명시하고 진행하면 어떤가 했는데 강의에서 아무것도 수정하고 있지 않으면 -1로 두길래 그렇게 하는 것이 좋아보여서 그렇게 함
-  const [myIndex, setMyIndex] = useState(-1);
+  const [myIndex, setMyIndex] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const { data } = useQuery<Pick<IQuery, "fetchBoards">, IQueryFetchBoardsArgs>(
     FETCH_BOARDS,
   );
 
   const onClickEdit = (event: MouseEvent<HTMLButtonElement>): void => {
-    setMyIndex(Number(event.currentTarget.id));
+    const newMyIndex = myIndex;
+    newMyIndex[Number(event.currentTarget.id)] = true;
+    setMyIndex(newMyIndex);
   };
 
   return (
     <div>
       {data?.fetchBoards.map((el, index) =>
-        index !== myIndex ? (
+        !myIndex[index] ? (
           <div key={el._id}>
             <span style={{ margin: "10px" }}>{el.title}</span>
             <span style={{ margin: "10px" }}>{el.writer}</span>
