@@ -36,7 +36,13 @@ export default function StaticRoutingBoardMovedPage(): JSX.Element {
   );
 
   const onClickEdit = (event: MouseEvent<HTMLButtonElement>): void => {
+    /*
     const newMyIndex = myIndex;
+    newMyIndex[Number(event.currentTarget.id)] = true;
+    setMyIndex(newMyIndex);
+    // newMyIndex는 myIndex의 주소만을 가져올 거라 setMyIndex 에 newMyIndex를 넘겨줘도 state는 달라진게 없다고 판단해서 state값을 수정하려도 시도도 하지 않고 리렌더링도 되지 않는 것이다. 그래서 const newMyIndex = [...myIndex] 로 해주던지 setMyIndex([...newMyIndex]) 로 해주어야 반영이 된다.
+    */
+    const newMyIndex = [...myIndex];
     newMyIndex[Number(event.currentTarget.id)] = true;
     setMyIndex(newMyIndex);
   };
