@@ -8,10 +8,11 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ApolloSetting>
       <>
-      <Global styles={globalStyles}/>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout></>
+        <Global styles={globalStyles}/>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </>
     </ApolloSetting>
   );
 }
