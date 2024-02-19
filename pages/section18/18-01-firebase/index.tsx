@@ -28,7 +28,7 @@ export default function FirebasePage() {
     // el.data()를 해야 꺼내올 수 있음
     const datas = result.docs.map((el) => el.data());
 
-    console.log(datas);
+    console.log(datas);  // 아직 board 컬렉션이 없어서 [](빈배열) 출력, undefined가 아니라 빈배열이 출력된
   };
 
   return (
