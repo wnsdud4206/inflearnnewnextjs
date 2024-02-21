@@ -1,10 +1,11 @@
 import { gql, useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ChangeEvent } from "react";
 import type {
   IMutation,
   IMutationUploadFileArgs,
 } from "../../../src/commons/types/generated/types";
+import { checkValidationFile } from "../../../src/commons/libraries/validationFile";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -16,6 +17,7 @@ const UPLOAD_FILE = gql`
 
 export default function ImageUploadPage(): JSX.Element {
   const [imgUrl, setImgUrl] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const [uploadFile] = useMutation<
     Pick<IMutation, "uploadFile">,
@@ -25,9 +27,11 @@ export default function ImageUploadPage(): JSX.Element {
   const onChangeFile = async (
     e: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
-    // array 앞에도 optional chaining을 붙일 수 있음
-    const file = e.target.files?.[0]; // array로 들어오는 이유: <input type="file" multiple /> 일 때, 여러개 드래그 가능
+    const file = e.target.files?.[0];
     console.log(file);
+
+    const isValid = checkValidationFile(file);
+    if (!isValid) return;
 
     const result = await uploadFile({
       variables: {
@@ -38,9 +42,27 @@ export default function ImageUploadPage(): JSX.Element {
     setImgUrl(result.data?.uploadFile.url ?? "");
   };
 
+  const onClickImage = (): void => {
+    // document.getElementById("파일태그ID")?.click();  // react스럽지 않은 방법
+    fileRef.current?.click();
+  };
+
   return (
     <>
-      <input type="file" onChange={onChangeFile} />
+      <div
+        style={{ width: "100px", height: "100px", backgroundColor: "gray" }}
+        onClick={onClickImage}
+      >
+        파일 선택
+      </div>
+      <input
+        ref={fileRef}
+        style={{ display: "none" }}
+        type="file"
+        onChange={onChangeFile}
+        // 띄어쓰기 없이
+        accept={"image/jpeg,image/png"}
+      />
       <img src={`https://storage.googleapis.com/${imgUrl}`} />
     </>
   );

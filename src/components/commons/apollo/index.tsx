@@ -24,7 +24,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   */
 
   const client = new ApolloClient({
-    link: ApolloLink.from(uploadLink),
+    link: ApolloLink.from([uploadLink]),
     cache: new InMemoryCache(),
   });
 
