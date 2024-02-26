@@ -35,7 +35,7 @@ export default function ImageUploadPage(): JSX.Element {
   const onChangeFile = async (
     e: ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]; // input 태그의 multiple 속성 true로 주면 여러개의 파일을 선택할 수 있음
     console.log(file);
 
     const isValid = checkValidationFile(file);
@@ -46,6 +46,7 @@ export default function ImageUploadPage(): JSX.Element {
         file,
       },
     });
+    // uploadFile로 주소를 받아왔다는 것은 storage에 이미지를 저장까지 했다는 말인데 이렇게 이미지 선택만 하고 새로고침을 한다던지 사이트나 브라우저를 꺼버리면 db에 저장은 하지 않았지만 storage에 이미지가 저장은 되어 있으니 storage 용량이 낭비되는 것 아닌가?
     console.log(result.data?.uploadFile.url);
     setImgUrl(result.data?.uploadFile.url ?? "");
   };
