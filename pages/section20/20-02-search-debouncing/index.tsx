@@ -1,10 +1,11 @@
 import { gql, useQuery } from "@apollo/client";
-import { useState } from "react";
+// import { useState } from "react";
 import type { ChangeEvent, MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../src/commons/types/generated/types";
+import _ from "lodash";
 
 const FETCH_BOARDS = gql`
   query fetchBoards($search: String, $page: Int) {
@@ -18,7 +19,7 @@ const FETCH_BOARDS = gql`
 `;
 
 export default function StaticRoutingBoardMovedPage(): JSX.Element {
-  const [searchInput, setSearchInput] = useState("");
+  // const [search, setSearch] = useState("");
 
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
@@ -27,23 +28,30 @@ export default function StaticRoutingBoardMovedPage(): JSX.Element {
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>): void => {
     void refetch({
-      search: searchInput,  // 없어야됨, 검색창에 단어가 있지만 검색하기는 누르지 않은 상태에서 페이지네이션을 클릭하면 검색이 해버리는 문제가 생김
       page: Number(event.currentTarget.id),
     });
   };
 
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSearchInput(event.target.value);
+  // getDebounce라는 변수명은 자유
+  const getDebounce = _.debounce((value) => {
+    // setTimeout 처럼 사용
+    void refetch({ search: value, page: 1 });
+  }, 500); // 1000은 1000ms, 1000ms = 1초
+  // 타이핑을 하다가 0.5초동안 아무 입력이 없으면 실행
+
+  const onChangeSearch = (event: ChangeEvent<HTMLInputElement>): void => {
+    // setSearch(event.currentTarget.value);
+    getDebounce(event.currentTarget.value);
   };
 
-  const onClickSearch = (): void => {
-    void refetch({ search: searchInput, page: 1 });
-  };
+  // const onClickSearch = (): void => {
+  //   void refetch({ search, page: 1 });
+  // };
 
   return (
     <div>
-      검색어입력: <input type="text" value={searchInput} onChange={onChangeInput} />
-      <button onClick={onClickSearch}>검색하기</button>
+      검색어입력: <input type="text" onChange={onChangeSearch} />
+      {/* <button onClick={onClickSearch}>검색하기</button> */}
       {data?.fetchBoards.map((el) => (
         <div key={el._id}>
           <span style={{ margin: "10px" }}>{el.title}</span>
