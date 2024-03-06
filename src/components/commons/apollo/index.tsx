@@ -9,6 +9,9 @@ import { createUploadLink } from "apollo-upload-client";
 // 강의에서는 위 처럼 해줬는데 버전이 달라져서 그런가 최신버전은 아래처럼 해줘야 error가 안생김
 // import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
+// 보통 이런 상수(변하지 않는 값)는 대문자로 지어주는 것이 좋다.
+const GLOBAL_STATE = new InMemoryCache();
+
 interface IApolloSettingProps {
   children: JSX.Element;
 }
@@ -25,7 +28,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
 
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
-    cache: new InMemoryCache(),
+    cache: GLOBAL_STATE,
   });
 
   // prettier-ignore
