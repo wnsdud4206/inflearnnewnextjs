@@ -26,18 +26,17 @@ interface IApolloSettingProps {
 }
 
 export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
-  const [accessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
+  const result = localStorage.getItem("accessToken");
+  console.log(result);
+  setAccessToken(result ?? ""); // result || accessToken 으로 해야되는 거 아닌가?
 
   const uploadLink = createUploadLink({
     uri: "https://backend-practice.codebootcamp.co.kr/graphql",
     headers: { Authorization: `Bearer ${accessToken}` },
     // 이제 어느 컴포넌트든 API 요청을 보내면 accessToken이 담긴다.
   });
-  /*
-  const errorLink
-  const authLink
-  이렇게 나중에는 uploadLink, errorLink, authLink 등을 배열로 묶어 아래의 ApolloClient 안에 등록하는 방식을 사용하게 된다.
-  */
 
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink]),
