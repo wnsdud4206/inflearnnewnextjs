@@ -50,7 +50,7 @@ export default function LoginPage(): JSX.Element {
         },
       });
 
-      console.log(result.data?.loginUser.accessToken); // accessToken
+      console.log(result.data?.loginUser.accessToken);
 
       const accessToken = result.data?.loginUser.accessToken;
 

@@ -44,7 +44,7 @@ export default function ApolloSetting(props: IApolloSettingProps): JSX.Element {
   // if (typeof window !== "undefined") {
   //   console.log("브라우저에서 실행!");
   // } else {
-  //   console.log("프론트엔드 서버에서 실행!");
+  //   console.log("프론트엔드 서버에서 실행!")
   // }
 
   // 3. pre-rendering 무시 - useEffect 방법
