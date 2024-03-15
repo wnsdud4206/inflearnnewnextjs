@@ -8,6 +8,7 @@ import type {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../../src/commons/types/generated/types";
+import LocalStorageTestPage from "../localStorageTest";
 
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -24,6 +25,8 @@ export default function LoginPage(): JSX.Element {
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
+
+  // console.log(localStorage.getItem("accessToken"));
 
   const [, setAccessToken] = useRecoilState(accessTokenState);
 
@@ -74,11 +77,16 @@ export default function LoginPage(): JSX.Element {
     }
   };
 
+  const onClickMove = (): void => {
+    void router.push("/section23/localStorageTest");
+  }
+
   return (
     <>
       email: <input id="email" type="text" onChange={onChangeInput} />
       password: <input id="password" type="text" onChange={onChangeInput} />
       <button onClick={onClickLogin}>Login</button>
+      <button onClick={onClickMove}>localStorageTestPage로 이동</button>
     </>
   );
 }
