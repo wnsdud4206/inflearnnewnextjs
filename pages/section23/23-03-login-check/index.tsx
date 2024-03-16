@@ -8,7 +8,6 @@ import type {
   IMutation,
   IMutationLoginUserArgs,
 } from "../../../src/commons/types/generated/types";
-import LocalStorageTestPage from "../23-02-localStorageTest";
 
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -63,7 +62,7 @@ export default function LoginPage(): JSX.Element {
       // Local Storage에 저장, 보안상 문제가 되기 때문에 임시로 사용, 나중에 지울 예정
       localStorage.setItem("accessToken", accessToken);
 
-      void router.push("/section23/23-02-login-localStorage-success");
+      void router.push("/section23/23-03-login-check-success");
     } catch (error) {
       // 그냥 error.message로 사용하면 error에 message가 있는지 모르겠다는 문제가 생겨서 if문으로 처리, error가 Error에서 파생된 건지
       /* ex.
@@ -77,16 +76,11 @@ export default function LoginPage(): JSX.Element {
     }
   };
 
-  const onClickMove = (): void => {
-    void router.push("/section23/localStorageTest");
-  };
-
   return (
     <>
       email: <input id="email" type="text" onChange={onChangeInput} />
       password: <input id="password" type="text" onChange={onChangeInput} />
       <button onClick={onClickLogin}>Login</button>
-      <button onClick={onClickMove}>localStorageTestPage로 이동</button>
     </>
   );
 }
