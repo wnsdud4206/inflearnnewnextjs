@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>함수의 인자도 변수인데 어떤 키워드로 선언되었을까?</title>
+    <script>
+      // const aaa = (a) => (b) => {
+      //   console.log(b);
+      //   console.log(a);
+      // }
+
+      function aaa(a) {
+        var a = 30; // a가 30으로 재선언, 재할당 되는 것 보니 함수의 인자는 var 키워드로 선언된 것 같다.
+        function bbb(b) {
+          console.log(b);
+          console.log(a);
+        }
+
+        bbb(20);
+      }
+
+      aaa(10);
+    </script>
+  </head>
+  <body></body>
+</html>
