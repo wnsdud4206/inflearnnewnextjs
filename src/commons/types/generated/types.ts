@@ -17,6 +17,8 @@ export type Scalars = {
 };
 
 export type IBoard = {
+  filter: any;
+  push: any;
   __typename?: 'Board';
   _id: Scalars['ID']['output'];
   boardAddress?: Maybe<IBoardAddress>;
