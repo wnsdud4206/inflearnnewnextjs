@@ -24,7 +24,8 @@ module.exports = {
     "parserOptions": {
         "project": '**\tsconfig.json',
         "ecmaVersion": 'latest',
-        "sourceType": 'module'
+        "sourceType": 'module',
+        // "tsconfigRootDir": __dirname,  // 강의에는 없지만 나만 추가
     },
     "plugins": [
         'react'
@@ -32,7 +33,7 @@ module.exports = {
     "rules": {
         "react/react-in-jsx-scope": "off",
         // "@typescript-eslint/consistent-type-imports": "off",
-        "@typescript-eslint/no-misused-promises": "off", // HOF를 배우고 나서 wrapAsync 함수로 해결 가능(그 전까지는 off 할 것)
+        // "@typescript-eslint/no-misused-promises": "off", // HOF를 배우고 나서 wrapAsync 함수로 해결 가능(그 전까지는 off 할 것)
         // 새로운 api인 pratice의 몇가지 규칙 임시로 꺼줌
         // "@typescript-eslint/consistent-type-definitions": "off",
         // "@typescript-eslint/array-type": "off",
@@ -40,5 +41,5 @@ module.exports = {
         // / 새로운 api인 pratice의 몇가지 규칙 임시로 꺼줌
     },
     // "parser": "@babel/eslint-parser",
-    "ignorePatterns": [".eslintrc.js"],
+    // "ignorePatterns": [".eslintrc.js"],
 }
