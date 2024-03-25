@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const FormErrorMessage = styled.input`
+export const FormErrorMessage = styled.div`
   color: red;
 `;
 
