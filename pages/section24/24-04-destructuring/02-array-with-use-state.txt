@@ -1,0 +1,21 @@
+function useState(initial) {
+
+  let state = initial;
+
+  const setState = (changeValue) => {
+    console.log(`${state}에서 ${changeValue}으로 값을 변경하겠습니다.`);  // 1. state 변경하기
+    console.log(`변경된 ${changeValue}을 사용해서 컴포넌트를 리렌더링 하겠습니다.`);  // 2. 해당 컴포넌트 리렌더링 시키기(render함수)
+  }
+
+  return [state, setState];
+}
+
+const [count, setCount] = useState(10);
+
+console.log(count);  // 10
+
+setState(5);
+/*
+10에서 5으로 값을 변경하겠습니다.
+변경된 5를 사용해서 컴포넌트를 리렌더링 하겠습니다.
+*/
