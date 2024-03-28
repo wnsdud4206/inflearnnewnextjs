@@ -1,7 +1,11 @@
+import { useRecoilState } from "recoil";
+import { visitedPageState } from "../../../src/commons/stores";
 import { useMoveToPage } from "../../../src/components/commons/hooks/useMoveToPage";
 
 export default function CustomHooksUseAuthPage(): JSX.Element {
-  const { onClickMoveToPage } = useMoveToPage();
+  const { onClickMoveToPage, visitedPage } = useMoveToPage();
+
+  console.log(visitedPage);
 
   return (
     <>
